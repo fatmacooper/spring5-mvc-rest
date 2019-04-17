@@ -13,7 +13,7 @@ public class CategoryMapperTest {
     @Test
     public void categoryToCategoryTest() throws Exception{
         Category category = new Category();
-        category.setId(1L);
+        category.setId(ID);
         category.setName(NAME);
 
         CategoryDTO categoryDTO = categoryMapper.categoryToCategoryDTO(category);
