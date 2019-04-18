@@ -14,11 +14,13 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 public class CustomerServiceTest {
     private final Long ID = 1L;
+    CustomerMapper customerMapper;
     @Mock
     private CustomerRepository customerRepository;
     private CustomerService customerService;
@@ -26,7 +28,9 @@ public class CustomerServiceTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        customerService = new CustomerServiceImpl(customerRepository, CustomerMapper.INSTANCE);
+        customerMapper = CustomerMapper.INSTANCE;
+        customerService = new CustomerServiceImpl(customerRepository, customerMapper);
+
     }
 
     @Test
@@ -46,4 +50,20 @@ public class CustomerServiceTest {
         assertEquals(customerService.getCustomerById(ID).getFirstname(),customer.getFirstname());
     }
 
+    @Test
+    public void testCreateCustomer(){
+        //given
+        Customer customer = new Customer();
+        customer.setId(1L);
+        customer.setFirstname("ftm");
+        customer.setLastname("cpr");
+        when(customerRepository.save(any())).thenReturn(customer);
+        //then
+        CustomerDTO customerDTO = customerService
+                .createCustomer(customerMapper.customerToCustomerDTO(customer));
+
+        assertEquals(customer.getFirstname(),customerDTO.getFirstname());
+        assertEquals(customer.getLastname(),customer.getLastname());
+        assertEquals(customerDTO.getCustomerUrl(),"/api/v1/customers/1");
+    }
 }

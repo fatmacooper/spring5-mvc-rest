@@ -47,7 +47,7 @@ public class CategoryControllerTest {
         List<CategoryDTO> categories = Arrays.asList(categoryDTO1,categoryDTO2);
         when(categoryService.getAllCategories()).thenReturn(categories);
         //when
-        mockMvc.perform(get("/api/v1/categories/")
+        mockMvc.perform(get("/api/v1/categories")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.categories",hasSize(2)));
