@@ -18,7 +18,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
-public class CustomerServiceTest {
+public class CustomerServiceTest{
     private final Long ID = 1L;
     CustomerMapper customerMapper;
     @Mock
@@ -57,7 +57,7 @@ public class CustomerServiceTest {
         customer.setId(1L);
         customer.setFirstname("ftm");
         customer.setLastname("cpr");
-        when(customerRepository.save(any())).thenReturn(customer);
+        when(customerRepository.save(any(Customer.class))).thenReturn(customer);
         //then
         CustomerDTO customerDTO = customerService
                 .createCustomer(customerMapper.customerToCustomerDTO(customer));
@@ -65,5 +65,24 @@ public class CustomerServiceTest {
         assertEquals(customer.getFirstname(),customerDTO.getFirstname());
         assertEquals(customer.getLastname(),customer.getLastname());
         assertEquals(customerDTO.getCustomerUrl(),"/api/v1/customers/1");
+    }
+
+    @Test
+    public void testUpdateCustomer(){
+        //given
+        Customer customer = new Customer();
+        customer.setId(1L);
+        customer.setFirstname("ftm");
+        customer.setLastname("cpr");
+
+        CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setFirstname("ftm");
+        when(customerRepository.save(any(Customer.class))).thenReturn(customer);
+        //then
+        CustomerDTO savedCustomerDTO = customerService
+                .updateCustomerByDTO(
+                1L,customerDTO);
+        assertEquals(savedCustomerDTO.getFirstname(),customer.getFirstname());
+        assertEquals(savedCustomerDTO.getCustomerUrl(),"/api/v1/customers/1");
     }
 }
