@@ -2,6 +2,7 @@ package com.orionsson.spring5mvcrest.services;
 
 import com.orionsson.spring5mvcrest.api.v1.mapper.CustomerMapper;
 import com.orionsson.spring5mvcrest.api.v1.model.CustomerDTO;
+import com.orionsson.spring5mvcrest.controllers.v1.CustomerController;
 import com.orionsson.spring5mvcrest.domain.Customer;
 import com.orionsson.spring5mvcrest.repositories.CustomerRepository;
 import org.junit.Before;
@@ -65,7 +66,7 @@ public class CustomerServiceTest{
 
         assertEquals(customer.getFirstname(),customerDTO.getFirstname());
         assertEquals(customer.getLastname(),customer.getLastname());
-        assertEquals(customerDTO.getCustomerUrl(),"/api/v1/customers/1");
+        assertEquals(customerDTO.getCustomerUrl(), CustomerController.BASE_URL + "/1");
     }
 
     @Test
@@ -84,7 +85,7 @@ public class CustomerServiceTest{
                 .updateCustomerByDTO(
                 1L,customerDTO);
         assertEquals(savedCustomerDTO.getFirstname(),customer.getFirstname());
-        assertEquals(savedCustomerDTO.getCustomerUrl(),"/api/v1/customers/1");
+        assertEquals(savedCustomerDTO.getCustomerUrl(),CustomerController.BASE_URL + "/1");
     }
 
     @Test
