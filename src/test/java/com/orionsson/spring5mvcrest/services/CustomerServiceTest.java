@@ -13,10 +13,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.when;
 
 public class CustomerServiceTest{
     private final Long ID = 1L;
@@ -84,5 +85,12 @@ public class CustomerServiceTest{
                 1L,customerDTO);
         assertEquals(savedCustomerDTO.getFirstname(),customer.getFirstname());
         assertEquals(savedCustomerDTO.getCustomerUrl(),"/api/v1/customers/1");
+    }
+
+    @Test
+    public void testDeleteCustomer(){
+        Long id = 1L;
+        customerService.deleteCustomerById(id);
+        verify(customerRepository,times(1)).deleteById(anyLong());
     }
 }
