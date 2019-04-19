@@ -37,10 +37,20 @@ public class CustomerServiceTest{
 
     @Test
     public void testGetAllCustomers() {
-        List<Customer> customers = Arrays.asList(new Customer(),new Customer());
-        when(customerRepository.findAll()).thenReturn(customers);
+        //given
+        Customer customer1 = new Customer();
+        customer1.setId(1l);
+        customer1.setFirstname("Michale");
+        customer1.setLastname("Weston");
+
+        Customer customer2 = new Customer();
+        customer2.setId(2l);
+        customer2.setFirstname("Sam");
+        customer2.setLastname("Axe");
+
+        when(customerRepository.findAll()).thenReturn(Arrays.asList(customer1, customer2));
         List<CustomerDTO> customerDTOS = customerService.getAllCustomers();
-        assertEquals(customerDTOS.size(),customers.size());
+        assertEquals(customerDTOS.size(),2);
     }
 
     @Test
