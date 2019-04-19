@@ -1,9 +1,11 @@
 package com.orionsson.spring5mvcrest.controllers.v1;
 
 import com.orionsson.spring5mvcrest.api.v1.model.CustomerDTO;
+import com.orionsson.spring5mvcrest.controllers.RestResponseEntityExceptionHandler;
 import com.orionsson.spring5mvcrest.domain.Customer;
 import com.orionsson.spring5mvcrest.repositories.CustomerRepository;
 import com.orionsson.spring5mvcrest.services.CustomerService;
+import com.orionsson.spring5mvcrest.services.ResourceNotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -39,7 +41,9 @@ public class CustomerControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(customerController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(customerController)
+                .setControllerAdvice(new RestResponseEntityExceptionHandler())
+                .build();
     }
 
     @Test
@@ -77,6 +81,7 @@ public class CustomerControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstname",equalTo("ftm")));
     }
+
     @Test
     public void testCreateCustomer() throws Exception{
         CustomerDTO customer = new CustomerDTO();
@@ -134,5 +139,13 @@ public class CustomerControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
         verify(customerService,times(1)).deleteCustomerById(anyLong());
+    }
+
+    @Test
+    public void testNotFoundException() throws Exception{
+        when(customerService.getCustomerById(anyLong())).thenThrow(ResourceNotFoundException.class);
+        mockMvc.perform(get(CustomerController.BASE_URL + "/222")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
     }
 }

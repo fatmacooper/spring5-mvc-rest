@@ -8,7 +8,6 @@ import com.orionsson.spring5mvcrest.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -29,20 +28,20 @@ public class CustomerServiceImpl implements CustomerService{
                 .stream()
                 .map(customer->{
                     CustomerDTO customerDTO = customerMapper.customerToCustomerDTO(customer);
-                    customerDTO.setCustomerUrl(CustomerController.BASE_URL);
+                    customerDTO.setCustomerUrl(getCustomerURL(customer.getId()));
                     return customerDTO;
                 })
                 .collect(Collectors.toList());
     }
     @Override
     public CustomerDTO getCustomerById(Long Id) {
-        Optional<Customer> customer = customerRepository.findById(Id);
-        if(customer == null){
-            throw new RuntimeException("Customer cannot be found!!!");
-        }
-        CustomerDTO customerDTO = customerMapper.customerToCustomerDTO(customer.get());
-        customerDTO.setCustomerUrl(getCustomerURL(Id));
-        return customerDTO;
+        return customerRepository.findById(Id)
+                .map(customerMapper::customerToCustomerDTO)
+                .map(customerDTO -> {
+                    //set API URL
+                    customerDTO.setCustomerUrl(getCustomerURL(Id));
+                    return customerDTO;
+                }).orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override
@@ -80,7 +79,7 @@ public class CustomerServiceImpl implements CustomerService{
                 CustomerDTO savedCustomerDTO = customerMapper.customerToCustomerDTO(customerRepository.save(customer));
                 savedCustomerDTO.setCustomerUrl(getCustomerURL(id));
                 return savedCustomerDTO;
-        }).orElseThrow(RuntimeException::new);
+        }).orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override
