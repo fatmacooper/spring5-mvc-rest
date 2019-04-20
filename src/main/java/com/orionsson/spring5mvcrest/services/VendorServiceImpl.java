@@ -3,7 +3,6 @@ package com.orionsson.spring5mvcrest.services;
 import com.orionsson.spring5mvcrest.api.v1.mapper.VendorMapper;
 import com.orionsson.spring5mvcrest.api.v1.model.VendorDTO;
 import com.orionsson.spring5mvcrest.api.v1.model.VendorListDTO;
-import com.orionsson.spring5mvcrest.controllers.RestResponseEntityExceptionHandler;
 import com.orionsson.spring5mvcrest.controllers.v1.VendorController;
 import com.orionsson.spring5mvcrest.domain.Vendor;
 import com.orionsson.spring5mvcrest.repositories.VendorRepository;

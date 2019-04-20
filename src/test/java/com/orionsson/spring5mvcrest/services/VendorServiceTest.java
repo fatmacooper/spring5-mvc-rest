@@ -3,7 +3,6 @@ package com.orionsson.spring5mvcrest.services;
 import com.orionsson.spring5mvcrest.api.v1.mapper.VendorMapper;
 import com.orionsson.spring5mvcrest.api.v1.model.VendorDTO;
 import com.orionsson.spring5mvcrest.api.v1.model.VendorListDTO;
-import com.orionsson.spring5mvcrest.controllers.v1.VendorController;
 import com.orionsson.spring5mvcrest.domain.Vendor;
 import com.orionsson.spring5mvcrest.repositories.VendorRepository;
 import org.junit.Before;
@@ -18,7 +17,6 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
