@@ -2,8 +2,6 @@ package com.orionsson.spring5mvcrest.controllers.v1;
 
 import com.orionsson.spring5mvcrest.api.v1.model.CustomerDTO;
 import com.orionsson.spring5mvcrest.controllers.RestResponseEntityExceptionHandler;
-import com.orionsson.spring5mvcrest.domain.Customer;
-import com.orionsson.spring5mvcrest.repositories.CustomerRepository;
 import com.orionsson.spring5mvcrest.services.CustomerService;
 import com.orionsson.spring5mvcrest.services.ResourceNotFoundException;
 import org.junit.Before;
@@ -16,7 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 import static com.orionsson.spring5mvcrest.controllers.v1.AbstractRestControllerTest.asJsonString;
 import static org.hamcrest.Matchers.equalTo;

@@ -4,7 +4,6 @@ import com.orionsson.spring5mvcrest.api.v1.model.CustomerDTO;
 import com.orionsson.spring5mvcrest.api.v1.model.CustomerListDTO;
 import com.orionsson.spring5mvcrest.services.CustomerService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,28 +21,33 @@ public class CustomerController {
     public CustomerListDTO getAllCustomers(){
         return new CustomerListDTO(customerService.getAllCustomers());
     }
+
     @GetMapping({"/{id}"})
     @ResponseStatus(HttpStatus.OK)
     public CustomerDTO getCustomerById(@PathVariable Long id){
         return customerService.getCustomerById(id);
     }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CustomerDTO createCustomer(@RequestBody CustomerDTO customerDTO){
         return customerService.createCustomer(customerDTO);
     }
+
     @PutMapping({"/{id}"})
     @ResponseStatus(HttpStatus.OK)
     public CustomerDTO updateCustomer(@PathVariable Long id,
                                       @RequestBody CustomerDTO customerDTO){
         return customerService.updateCustomerByDTO(id,customerDTO);
     }
+
     @PatchMapping({"/{id}"})
     @ResponseStatus(HttpStatus.OK)
     public CustomerDTO patchCustomer(@PathVariable Long id,
                                      @RequestBody CustomerDTO customerDTO){
         return customerService.patchCustomerByDTO(id,customerDTO);
     }
+
     @DeleteMapping({"/{id}"})
     @ResponseStatus(HttpStatus.OK)
     public void deleteCustomer(@PathVariable Long id){

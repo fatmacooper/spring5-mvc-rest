@@ -6,6 +6,7 @@ import com.orionsson.spring5mvcrest.bootstrap.Bootstrap;
 import com.orionsson.spring5mvcrest.domain.Customer;
 import com.orionsson.spring5mvcrest.repositories.CategoryRepository;
 import com.orionsson.spring5mvcrest.repositories.CustomerRepository;
+import com.orionsson.spring5mvcrest.repositories.VendorRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,12 +25,14 @@ public class CustomerServiceITTest {
     CustomerRepository customerRepository;
     @Autowired
     CategoryRepository categoryRepository;
+    @Autowired
+    VendorRepository vendorRepository;
 
     CustomerService customerService;
 
     @Before
     public void setup() throws Exception{
-        Bootstrap bootstrap = new Bootstrap(categoryRepository,customerRepository);
+        Bootstrap bootstrap = new Bootstrap(categoryRepository,customerRepository,vendorRepository);
         bootstrap.run();
 
         customerService = new CustomerServiceImpl(customerRepository, CustomerMapper.INSTANCE);

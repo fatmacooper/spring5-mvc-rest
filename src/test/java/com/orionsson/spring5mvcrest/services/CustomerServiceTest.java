@@ -75,7 +75,7 @@ public class CustomerServiceTest{
                 .createCustomer(customerMapper.customerToCustomerDTO(customer));
 
         assertEquals(customer.getFirstname(),customerDTO.getFirstname());
-        assertEquals(customer.getLastname(),customer.getLastname());
+        assertEquals(customer.getLastname(),customerDTO.getLastname());
         assertEquals(customerDTO.getCustomerUrl(), CustomerController.BASE_URL + "/1");
     }
 
