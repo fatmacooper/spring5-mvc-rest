@@ -59,6 +59,7 @@ public class CustomerControllerTest {
         when(customerService.getAllCustomers()).thenReturn(Arrays.asList(customer1,customer2));
         //then
         mockMvc.perform(get(CustomerController.BASE_URL)
+                .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.customers", hasSize(2)));
@@ -74,6 +75,7 @@ public class CustomerControllerTest {
         when(customerService.getCustomerById(anyLong())).thenReturn(customer1);
         //then
         mockMvc.perform(get(CustomerController.BASE_URL + "/1")
+                .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstname",equalTo("ftm")));
@@ -88,6 +90,7 @@ public class CustomerControllerTest {
         when(customerService.createCustomer(any())).thenReturn(customer);
         //then
         mockMvc.perform(post(CustomerController.BASE_URL)
+                .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(customer)))
                 .andExpect(status().isCreated())
@@ -104,6 +107,7 @@ public class CustomerControllerTest {
         when(customerService.updateCustomerByDTO(anyLong(),any(CustomerDTO.class))).thenReturn(customer);
         //then
         mockMvc.perform(put("/api/v1/customers/1")
+                .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(customer)))
                 .andExpect(status().isOk())
@@ -123,6 +127,7 @@ public class CustomerControllerTest {
         when(customerService.patchCustomerByDTO(anyLong(),any(CustomerDTO.class))).thenReturn(savedCustomerDTO);
         //then
         mockMvc.perform(patch(CustomerController.BASE_URL + "/1")
+                .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(customerDTO)))
                 .andExpect(status().isOk())
