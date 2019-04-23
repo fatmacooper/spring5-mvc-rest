@@ -1,6 +1,6 @@
 package com.orionsson.spring5mvcrest.api.v1.mapper;
 
-import com.orionsson.spring5mvcrest.api.v1.model.CustomerDTO;
+import com.orionsson.model.CustomerDTO;
 import com.orionsson.spring5mvcrest.domain.Customer;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

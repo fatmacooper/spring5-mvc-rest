@@ -1,6 +1,6 @@
 package com.orionsson.spring5mvcrest.services;
 
-import com.orionsson.spring5mvcrest.api.v1.model.CustomerDTO;
+import com.orionsson.model.CustomerDTO;
 
 import java.util.List;
 

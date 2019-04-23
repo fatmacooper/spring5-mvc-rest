@@ -1,7 +1,7 @@
 package com.orionsson.spring5mvcrest.controllers.v1;
 
-import com.orionsson.spring5mvcrest.api.v1.model.CustomerDTO;
-import com.orionsson.spring5mvcrest.api.v1.model.CustomerListDTO;
+import com.orionsson.model.CustomerDTO;
+import com.orionsson.model.CustomerListDTO;
 import com.orionsson.spring5mvcrest.services.CustomerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -23,7 +23,9 @@ public class CustomerController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public CustomerListDTO getAllCustomers(){
-        return new CustomerListDTO(customerService.getAllCustomers());
+        CustomerListDTO customerListDTO = new CustomerListDTO();
+        customerListDTO.getCustomers().addAll(customerService.getAllCustomers());
+        return customerListDTO;
     }
 
     @GetMapping({"/{id}"})

@@ -1,6 +1,6 @@
 package com.orionsson.spring5mvcrest.controllers.v1;
 
-import com.orionsson.spring5mvcrest.api.v1.model.CustomerDTO;
+import com.orionsson.model.CustomerDTO;
 import com.orionsson.spring5mvcrest.controllers.RestResponseEntityExceptionHandler;
 import com.orionsson.spring5mvcrest.services.CustomerService;
 import com.orionsson.spring5mvcrest.services.ResourceNotFoundException;
