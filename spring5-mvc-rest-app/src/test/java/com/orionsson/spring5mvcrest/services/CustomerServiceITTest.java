@@ -1,7 +1,7 @@
 package com.orionsson.spring5mvcrest.services;
 
+import com.orionsson.model.CustomerDTO;
 import com.orionsson.spring5mvcrest.api.v1.mapper.CustomerMapper;
-import com.orionsson.spring5mvcrest.api.v1.model.CustomerDTO;
 import com.orionsson.spring5mvcrest.bootstrap.Bootstrap;
 import com.orionsson.spring5mvcrest.domain.Customer;
 import com.orionsson.spring5mvcrest.repositories.CategoryRepository;

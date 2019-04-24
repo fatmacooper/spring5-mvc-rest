@@ -6,14 +6,13 @@
     <artifactId>spring5-mvc-rest-app</artifactId>
     <packaging>jar</packaging>
 
-    <name>spring5-mvc-rest-app</name>
-    <description>Demo project for Spring Boot MVC and Restful services</description>
+    <name>spring5-mvc-rest</name>
+    <description>Demo project for Spring Boot</description>
 
     <parent>
         <groupId>com.orionsson</groupId>
         <artifactId>spring5-mvc-rest-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
 
     <dependencies>
@@ -56,7 +55,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.mapstruct</groupId>
@@ -95,7 +94,7 @@
                         <format>html</format>
                         <format>xml</format>
                     </formats>
-                    <check />
+                    <check/>
                 </configuration>
             </plugin>
             <plugin>
@@ -134,4 +133,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

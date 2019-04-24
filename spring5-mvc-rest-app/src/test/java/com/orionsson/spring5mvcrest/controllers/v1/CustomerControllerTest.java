@@ -95,7 +95,7 @@ public class CustomerControllerTest {
                 .content(asJsonString(customer)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.firstname", equalTo("ftm")))
-                .andExpect(jsonPath("$.customer_url",equalTo(CustomerController.BASE_URL + "/1")));
+                .andExpect(jsonPath("$.customerUrl",equalTo(CustomerController.BASE_URL + "/1")));
     }
     @Test
     public void testUpdateCustomer() throws Exception{
@@ -112,7 +112,7 @@ public class CustomerControllerTest {
                 .content(asJsonString(customer)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstname",equalTo("ftm")))
-                .andExpect(jsonPath("$.customer_url",equalTo(CustomerController.BASE_URL + "/1")));
+                .andExpect(jsonPath("$.customerUrl",equalTo(CustomerController.BASE_URL + "/1")));
     }
 
     @Test
@@ -132,7 +132,7 @@ public class CustomerControllerTest {
                 .content(asJsonString(customerDTO)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstname",equalTo(customerDTO.getFirstname())))
-                .andExpect(jsonPath("$.customer_url",equalTo("/api/v1/customers/1")));
+                .andExpect(jsonPath("$.customerUrl",equalTo("/api/v1/customers/1")));
     }
 
     @Test
